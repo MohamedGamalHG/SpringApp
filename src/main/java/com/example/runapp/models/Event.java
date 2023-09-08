@@ -1,7 +1,7 @@
 package com.example.runapp.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,33 +10,31 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "clubs")
-public class Club {
-
+public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @NotEmpty(message = "Club Title not be empty")
-    private String title;
-    @NotEmpty(message = "Club Photo not be empty")
-
+    private Long id;
+//    @NotNull(message = "no Empty")
+    private String name;
+//    @NotNull(message = "no Empty")
+    private String type;
+//    @NotNull(message = "no Empty")
     private String photoUrl;
-    @NotEmpty(message = "Club Content not be empty")
-
-    private String content;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     @CreationTimestamp
     private LocalDateTime created_at;
     @UpdateTimestamp
     private LocalDateTime updated_at;
 
-    @OneToMany(mappedBy = "club")
-    private List<Event> events;
+    @ManyToOne
+    @JoinColumn(name = "club_id")
+    private Club club;
 
 }

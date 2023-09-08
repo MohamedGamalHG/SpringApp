@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts}">
+
+<head>
+</head>
+<body class="d-flex flex-column h-100">
+<main  class="flex-shrink-0">
+  <!-- Navigation-->
+
+  <!-- Page Content-->
+  <section layout:fragment="body" class="py-5">
+    <div class="container px-5 my-5">
+      <div class="text-center mb-5">
+        <h1 class="fw-bolder">Our Work</h1>
+        <p class="lead fw-normal text-muted mb-0">Company portfolio</p>
+      </div>
+      <div class="row gx-5">
+        <div  class="col-lg-6">
+          <div class="position-relative mb-5">
+            <img class="img-fluid rounded-3 mb-3"  th:src="${club.photoUrl}" alt="..." />
+            <a th:text="${club.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link">Project name</a>
+          </div>
+          <div th:each="event :${club.events}" class="col-lg-6">
+            <div class="position-relative mb-5">
+              <img class="img-fluid rounded-3 mb-3"  th:src="${event.photoUrl}" alt="..." />
+              <h2 th:text="${event.name}" >Project name</h2>
+              <p th:text="${event.type}"></p>
+              <p th:text="${event.startTime}"></p>
+              <p th:text="${event.endTime}"></p>
+<!--              <p th:text="${'realated to ' + event.club.title}"></p>-->
+            </div>
+          </div>
+          <a th:href="@{/events/create/{clubId}(clubId=${club.id})}">Add Event</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

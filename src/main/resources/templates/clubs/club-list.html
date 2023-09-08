@@ -14,6 +14,9 @@
             <div class="text-center mb-5">
                 <h1 class="fw-bolder">Our Work</h1>
                 <p class="lead fw-normal text-muted mb-0">Company portfolio</p>
+                <form th:action="@{/clubs/search}">
+                    <input name="query" placeholder="Search ...." class="form-control" type="text" >
+                </form>
             </div>
             <div class="row gx-5">
                 <div th:each="club : ${clubs}" class="col-lg-6">
@@ -21,6 +24,8 @@
                         <img class="img-fluid rounded-3 mb-3"  th:src="${club.photoUrl}" alt="..." />
                         <a th:text="${club.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" th:href="@{/clubs/update/{clubId}(clubId=${club.id})}">Project name</a>
                     </div>
+                    <a th:href="@{/clubs/item/{id}(id=${club.id})}" class="btn-primary">View</a>
+                    <a th:href="@{/clubs/delete/{id}(id=${club.id})}" class="btn-primary">Delete</a>
                 </div>
             </div>
         </div>
